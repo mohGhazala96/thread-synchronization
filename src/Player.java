@@ -2,8 +2,8 @@
 public class Player extends  Thread {
 	int id;
 	int waitingTime;
-	boolean onBoardFlag;
-	boolean rideCompleteFlag;
+	public boolean onBoardFlag;
+	public boolean rideCompleteFlag;
 
 	@SuppressWarnings("static-access")
 	public Player(int id, int waitingTime ) {
@@ -13,10 +13,11 @@ public class Player extends  Thread {
 		this.rideCompleteFlag =false;
 		//A Player thread is initially put to sleep according to its waiting time.
 		try {
-			this.sleep(waitingTime); // not sure ?
+			this.sleep(waitingTime); 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		//calls operator
 		
 	}
 }
