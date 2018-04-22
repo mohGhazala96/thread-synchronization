@@ -44,8 +44,9 @@ public class Operator {
 				wheelThread.loadPlayers(first);
 			}
 			if(wheelThread.capacity==0 && wheelThread.running==false) {
-				System.out.println("asd");
-//				wheelThread.run();
+				System.out.println("Wheel is full, Let's go for a ride ");
+				System.out.println("Threads in this ride are: "+players.toString());
+				//wheelThread.run();
 				wheelThread.running = true;
 				wheelThread.runRide();
 			}

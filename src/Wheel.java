@@ -23,8 +23,7 @@ public class Wheel implements Runnable{
 		players.add(player);
 	}
 	public void runRide() {
-		System.out.println("Wheel is full, Let's go for a ride ");
-		System.out.println("Threads in this ride are: "+players.toString());
+		System.out.println("in ride ");
 		for (int i=0;i<players.size();i++) {
 			System.out.print(players.get(i).id+" ");
 			players.get(i).onBoardFlag=true;
