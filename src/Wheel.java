@@ -21,7 +21,7 @@ public class Wheel extends Thread {
 		}
 		
 	}
-	public void loadPlayers(Player player) {
+	public synchronized void loadPlayers(Player player) {
 		players.add(player);
 	}
 	public void runRide() {

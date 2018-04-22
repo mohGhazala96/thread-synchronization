@@ -21,5 +21,13 @@ public class Operator {
 		}
 		
 		
+//		if(fileName.equals("input-1.txt")) { 
+//			PrintStream out = new PrintStream(new FileOutputStream("output1.txt"));
+//			System.setOut(out);
+//		}else {
+//			PrintStream out = new PrintStream(new FileOutputStream("output2.txt"));
+//			System.setOut(out);
+//		}
+//		
 	}
 }
