@@ -14,7 +14,7 @@ public class Operator {
 		// second line -> total players count 
 		// third line till the end of the file -> the player threads' info  (thread id , Waiting time )
 		queue = new LinkedList<Player>(); 
-		ArrayList<String> lines = HelperFunctions.OpenFile("./src/input1.txt");
+		ArrayList<String> lines = HelperFunctions.OpenFile("./src/input2.txt");
 		players = new ArrayList<Player>();
 		int maxWaitingTime = Integer.parseInt(lines.get(0)) ;
 		int playersCount = Integer.parseInt(lines.get(1)) ;
@@ -39,14 +39,14 @@ public class Operator {
 			if(players.size()==0) {
 				break;
 			}
-			if(wheelThread.capacity>0 && wheelThread.running==false && queue.size()>0) {
+			if(wheelThread.players.size()<5 && wheelThread.running==false && queue.size()>0) {
 				Player first = queue.poll();
 				wheelThread.loadPlayers(first);
 			}
 			if(wheelThread.capacity==0 && wheelThread.running==false) {
-				System.out.println("asd");
+				System.out.println("Wheel is full, Let's go for a ride ");
 //				wheelThread.run();
-				wheelThread.running = true;
+
 				wheelThread.runRide();
 			}
 		}

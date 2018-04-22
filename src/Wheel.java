@@ -23,7 +23,7 @@ public class Wheel implements Runnable{
 		players.add(player);
 	}
 	public void runRide() {
-		System.out.println("Wheel is full, Let's go for a ride ");
+		this.running = true;
 		System.out.println("Threads in this ride are: "+players.toString());
 		for (int i=0;i<players.size();i++) {
 			System.out.print(players.get(i).id+" ");
@@ -52,7 +52,9 @@ public class Wheel implements Runnable{
 			this.capacity=5;
 			Thread.sleep(maxWaitingTime);
 			System.out.println("wheel end sleep");
-			this.runRide();
+			if(this.running=false)
+				this.runRide();
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
