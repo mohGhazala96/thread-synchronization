@@ -23,16 +23,15 @@ public class Wheel implements Runnable{
 		players.add(player);
 	}
 	public void runRide() {
-		System.out.println("in ride ");
-
-		this.running = true;
-		System.out.println("Threads in this ride are: "+players.toString());
+		if(this.running) {
+		System.out.println("Threads in this ride are: ");
 		for (int i=0;i<players.size();i++) {
 			System.out.print(players.get(i).id+" ");
 			players.get(i).onBoardFlag=true;
 		}
 		System.out.println("");
 		endRide();
+		}
 		
 		
 	}
@@ -44,26 +43,15 @@ public class Wheel implements Runnable{
 			Operator.players.remove(players.get(i));
 			players.remove(i);
 		}
-		this.running=false;
-		startTheProcess();
+		Operator.startTheProcess();
 		
 	}
 	
-	void startTheProcess(){
-		try {
-			this.capacity=5;
-			Thread.sleep(maxWaitingTime);
-			System.out.println("wheel end sleep");
-			this.runRide();
 
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 	@Override
 	public void run() {
-		System.out.println("?");
-		this.startTheProcess();
+		// TODO Auto-generated method stub
+		Operator.startTheProcess();
 	}
 
 

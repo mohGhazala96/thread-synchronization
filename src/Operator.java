@@ -1,4 +1,6 @@
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -7,21 +9,32 @@ import java.util.Queue;
 public class Operator {
 	public volatile static ArrayList<Player> players;
 	static volatile Queue<Player> queue;
-	static Wheel wheelThread;
+	static Wheel wheel;
+	static Thread wheelThread;
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IOException {	
+		String fileName= "./src/input1.txt";
+		if(fileName.equals("./src/input1.txt")) { 
+			PrintStream out = new PrintStream(new FileOutputStream("output1.txt"));
+			System.setOut(out);
+		}else {
+			PrintStream out = new PrintStream(new FileOutputStream("output2.txt"));
+			System.setOut(out);
+		}
+		
 		// first line -> max wait time
 		// second line -> total players count 
 		// third line till the end of the file -> the player threads' info  (thread id , Waiting time )
 		queue = new LinkedList<Player>(); 
-		ArrayList<String> lines = HelperFunctions.OpenFile("./src/input1.txt");
+		ArrayList<String> lines = HelperFunctions.OpenFile(fileName);
 		players = new ArrayList<Player>();
 		int maxWaitingTime = Integer.parseInt(lines.get(0)) ;
 		int playersCount = Integer.parseInt(lines.get(1)) ;
 		
-		wheelThread = new Wheel(maxWaitingTime);
-		Thread t = new Thread(wheelThread);
-		t.start();
+		wheel = new Wheel(maxWaitingTime);
+		wheelThread = new Thread(wheel);
+		wheelThread.start();
+		
 
 
 		for (int i=2;i<lines.size();i++) { //instantiate player thread here
@@ -39,15 +52,14 @@ public class Operator {
 			if(players.size()==0) {
 				break;
 			}
-			if(wheelThread.players.size()<5 && wheelThread.running==false && queue.size()>0) {
+			if((wheel.players.size()<5 && wheel.running==false) && queue.size()>0) {
 				Player first = queue.poll();
-				wheelThread.loadPlayers(first);
+				wheel.loadPlayers(first);
 			}
-			if(wheelThread.capacity==0 && wheelThread.running==false) {
+			if(wheel.capacity==0 && wheel.running==false) {
+				wheel.running = true;
 				System.out.println("Wheel is full, Let's go for a ride ");
-				//wheelThread.run();
-				wheelThread.running = true;
-				wheelThread.runRide();
+				wheelThread.interrupt();
 			}
 		}
 	}
@@ -56,6 +68,24 @@ public class Operator {
 		System.out.println("passing player: "+p.id+" to the operator");
 		queue.add(p);
 
+	}
+	
+	public static void startTheProcess(){
+		try {
+			wheel.running = false;
+			wheel.capacity=5;
+			Thread.sleep(wheel.maxWaitingTime);
+			wheel.running = true;
+			System.out.println("wheel end sleep");
+			if(players.size()>0&&wheel.players.size()>0)
+				wheel.runRide();
+
+		} catch (InterruptedException e) {
+			
+			wheel.running = true;
+			if(players.size()>0)
+				wheel.runRide();
+		}
 	}
 	
 	
