@@ -39,13 +39,12 @@ public class Operator {
 			if(players.size()==0) {
 				break;
 			}
-			if(wheelThread.capacity>0 && wheelThread.running==false && queue.size()>0) {
+			if(wheelThread.players.size()<5 && wheelThread.running==false && queue.size()>0) {
 				Player first = queue.poll();
 				wheelThread.loadPlayers(first);
 			}
 			if(wheelThread.capacity==0 && wheelThread.running==false) {
 				System.out.println("Wheel is full, Let's go for a ride ");
-				System.out.println("Threads in this ride are: "+players.toString());
 				//wheelThread.run();
 				wheelThread.running = true;
 				wheelThread.runRide();

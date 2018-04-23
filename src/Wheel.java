@@ -24,6 +24,9 @@ public class Wheel implements Runnable{
 	}
 	public void runRide() {
 		System.out.println("in ride ");
+
+		this.running = true;
+		System.out.println("Threads in this ride are: "+players.toString());
 		for (int i=0;i<players.size();i++) {
 			System.out.print(players.get(i).id+" ");
 			players.get(i).onBoardFlag=true;
@@ -52,13 +55,14 @@ public class Wheel implements Runnable{
 			Thread.sleep(maxWaitingTime);
 			System.out.println("wheel end sleep");
 			this.runRide();
+
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		System.out.println("?");
 		this.startTheProcess();
 	}
 
