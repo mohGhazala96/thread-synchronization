@@ -1,4 +1,4 @@
-# Mini-project-3
+# thread-synchronization assignment 
 ## Introduction:
   This project is nothing but trying to synchronize threads in Java, by simulating a scenario of the fair wheel ride in Java, a full description can found [here](https://github.com/mohGhazala96/Mini-project-3/blob/master/Mini-Project-3-Description_26555.pdf)
 
