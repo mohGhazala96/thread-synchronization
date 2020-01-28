@@ -1,4 +1,8 @@
 # Mini-project-3
+## Introduction:
+  This project is nothing but trying to synchronize threads in Java, by simulating a scenario of the fair wheel ride in Java, a full description can found [here](https://github.com/AbdullahKady/thread-synchronization/blob/master/DOCS/description.pdf)
+
+
 ## Player Thread
 • A player has four main attributes: ID, waiting time, on-board flag, and a ride-complete flag. Both flags, on-board and ride-complete, are initially false.<br>
 • A Player thread is initially put to sleep according to its waiting time. Upon waking up, the player calls the operator to queue for the next ride.<br>
